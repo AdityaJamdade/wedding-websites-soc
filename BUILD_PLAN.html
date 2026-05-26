@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wedding Website Business — Master Build Plan</title>
+  <style>
+    :root {
+      --gold: #C9A96E;
+      --gold-light: #E8D5A3;
+      --gold-dim: #8B6F3A;
+      --ink: #0D0D12;
+      --ink-soft: #1A1A24;
+      --ink-mid: #252535;
+      --surface: #141420;
+      --surface-raised: #1C1C2E;
+      --surface-card: #1F1F32;
+      --border: rgba(201,169,110,0.15);
+      --border-bright: rgba(201,169,110,0.35);
+      --text: #E8E4DC;
+      --text-dim: #9994A8;
+      --text-faint: #5A5672;
+      --bespoke: #C9A96E;
+      --luxe: #9B8EC4;
+      --prestige: #6DD5D0;
+      --signature: #E887A0;
+      --essential: #78C4A0;
+      --radius: 12px;
+      --radius-lg: 20px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: var(--ink);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── Typography ── */
+    h1, h2, h3, h4 { font-weight: normal; letter-spacing: 0.02em; }
+    .sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+
+    /* ── Layout ── */
+    .wrap { max-width: 1060px; margin: 0 auto; padding: 0 32px; }
+    .section { padding: 80px 0; border-bottom: 1px solid var(--border); }
+    .section:last-child { border-bottom: none; }
+
+    /* ── Hero ── */
+    .hero {
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,169,110,0.12) 0%, transparent 65%),
+                  linear-gradient(180deg, #0D0D18 0%, #0D0D12 100%);
+      padding: 100px 0 80px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-eyebrow {
+      font-family: -apple-system, sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+      opacity: 0.85;
+    }
+    .hero h1 {
+      font-size: clamp(36px, 5vw, 64px);
+      color: var(--gold-light);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .hero h1 span { color: var(--gold); }
+    .hero-sub {
+      font-family: -apple-system, sans-serif;
+      font-size: 17px;
+      color: var(--text-dim);
+      max-width: 580px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+    .goal-pills {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .pill {
+      font-family: -apple-system, sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 8px 20px;
+      border-radius: 999px;
+      border: 1px solid var(--border-bright);
+      background: rgba(201,169,110,0.07);
+      color: var(--gold-light);
+      letter-spacing: 0.03em;
+    }
+
+    /* ── Section headings ── */
+    .section-label {
+      font-family: -apple-system, sans-serif;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(26px, 3.5vw, 40px);
+      color: var(--gold-light);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    .section-intro {
+      font-family: -apple-system, sans-serif;
+      font-size: 16px;
+      color: var(--text-dim);
+      max-width: 640px;
+      margin-bottom: 56px;
+      line-height: 1.65;
+    }
+
+    /* ── Tier Stack Diagram ── */
+    .tier-stack { display: flex; flex-direction: column; gap: 2px; }
+    .tier-row {
+      display: grid;
+      grid-template-columns: 160px 1fr auto;
+      align-items: center;
+      gap: 20px;
+      padding: 20px 24px;
+      border-radius: var(--radius);
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      transition: border-color 0.2s;
+      cursor: default;
+    }
+    .tier-row:hover { border-color: var(--border-bright); }
+    .tier-row.tier-bespoke { border-left: 3px solid var(--bespoke); }
+    .tier-row.tier-luxe    { border-left: 3px solid var(--luxe); }
+    .tier-row.tier-prestige { border-left: 3px solid var(--prestige); }
+    .tier-row.tier-signature { border-left: 3px solid var(--signature); }
+    .tier-row.tier-essential { border-left: 3px solid var(--essential); }
+
+    .tier-name-block { display: flex; flex-direction: column; gap: 3px; }
+    .tier-name {
+      font-size: 18px;
+      font-weight: 600;
+      font-family: -apple-system, sans-serif;
+      letter-spacing: 0.01em;
+    }
+    .tier-row.tier-bespoke .tier-name { color: var(--bespoke); }
+    .tier-row.tier-luxe .tier-name    { color: var(--luxe); }
+    .tier-row.tier-prestige .tier-name { color: var(--prestige); }
+    .tier-row.tier-signature .tier-name { color: var(--signature); }
+    .tier-row.tier-essential .tier-name { color: var(--essential); }
+
+    .tier-tag {
+      font-family: -apple-system, sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+    }
+    .tier-desc {
+      font-family: -apple-system, sans-serif;
+      font-size: 13.5px;
+      color: var(--text-dim);
+      line-height: 1.55;
+    }
+    .tier-price {
+      font-size: 22px;
+      font-family: -apple-system, sans-serif;
+      font-weight: 300;
+      color: var(--text);
+      white-space: nowrap;
+      text-align: right;
+    }
+    .tier-price .price-sub {
+      display: block;
+      font-size: 11px;
+      color: var(--text-faint);
+      text-align: right;
+      margin-top: 2px;
+    }
+    .tier-status {
+      display: inline-block;
+      font-family: -apple-system, sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin-top: 4px;
+    }
+    .status-build { background: rgba(201,169,110,0.15); color: var(--gold); }
+    .status-ready { background: rgba(120,196,160,0.15); color: var(--essential); }
+    .status-enhance { background: rgba(109,213,208,0.12); color: var(--prestige); }
+
+    /* ── Tier Detail Cards ── */
+    .tier-detail {
+      margin-bottom: 48px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .tier-detail-header {
+      padding: 32px 36px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .tier-detail.bespoke .tier-detail-header { background: radial-gradient(ellipse 80% 100% at 0% 50%, rgba(201,169,110,0.08) 0%, transparent 70%), var(--surface-raised); }
+    .tier-detail.luxe .tier-detail-header    { background: radial-gradient(ellipse 80% 100% at 0% 50%, rgba(155,142,196,0.08) 0%, transparent 70%), var(--surface-raised); }
+    .tier-detail.prestige .tier-detail-header { background: radial-gradient(ellipse 80% 100% at 0% 50%, rgba(109,213,208,0.07) 0%, transparent 70%), var(--surface-raised); }
+    .tier-detail.signature .tier-detail-header { background: radial-gradient(ellipse 80% 100% at 0% 50%, rgba(232,135,160,0.07) 0%, transparent 70%), var(--surface-raised); }
+    .tier-detail.essential .tier-detail-header { background: radial-gradient(ellipse 80% 100% at 0% 50%, rgba(120,196,160,0.07) 0%, transparent 70%), var(--surface-raised); }
+
+    .tier-detail-title { font-size: 28px; margin-bottom: 6px; }
+    .bespoke .tier-detail-title { color: var(--bespoke); }
+    .luxe .tier-detail-title    { color: var(--luxe); }
+    .prestige .tier-detail-title { color: var(--prestige); }
+    .signature .tier-detail-title { color: var(--signature); }
+    .essential .tier-detail-title { color: var(--essential); }
+
+    .tier-detail-tagline {
+      font-family: -apple-system, sans-serif;
+      font-size: 14px;
+      color: var(--text-dim);
+      font-style: italic;
+      margin-bottom: 12px;
+    }
+    .tier-detail-price-block { text-align: right; }
+    .tier-detail-price {
+      font-family: -apple-system, sans-serif;
+      font-size: 32px;
+      font-weight: 300;
+      color: var(--text);
+    }
+    .tier-detail-price-note {
+      font-family: -apple-system, sans-serif;
+      font-size: 12px;
+      color: var(--text-faint);
+      margin-top: 4px;
+    }
+
+    .tier-detail-body {
+      padding: 32px 36px;
+      background: var(--surface-card);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    @media (max-width: 700px) {
+      .tier-detail-body { grid-template-columns: 1fr; }
+      .tier-row { grid-template-columns: 1fr 1fr; }
+    }
+
+    .feature-group h4 {
+      font-family: -apple-system, sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 14px;
+    }
+    .feature-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .feature-list li {
+      font-family: -apple-system, sans-serif;
+      font-size: 13.5px;
+      color: var(--text);
+      padding-left: 20px;
+      position: relative;
+      line-height: 1.5;
+    }
+    .feature-list li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      font-size: 8px;
+      top: 4px;
+    }
+    .bespoke .feature-list li::before { color: var(--bespoke); }
+    .luxe .feature-list li::before    { color: var(--luxe); }
+    .prestige .feature-list li::before { color: var(--prestige); }
+    .signature .feature-list li::before { color: var(--signature); }
+    .essential .feature-list li::before { color: var(--essential); }
+
+    .feature-list li .feat-note {
+      color: var(--text-faint);
+      font-size: 12px;
+    }
+
+    /* ── Cascade Table ── */
+    .cascade-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-family: -apple-system, sans-serif;
+      font-size: 13px;
+    }
+    .cascade-table th {
+      padding: 12px 16px;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--surface-raised);
+      border-bottom: 1px solid var(--border);
+    }
+    .cascade-table th:first-child { text-align: left; }
+    .cascade-table th:nth-child(2) { color: var(--bespoke); }
+    .cascade-table th:nth-child(3) { color: var(--luxe); }
+    .cascade-table th:nth-child(4) { color: var(--prestige); }
+    .cascade-table th:nth-child(5) { color: var(--signature); }
+    .cascade-table th:nth-child(6) { color: var(--essential); }
+    .cascade-table td {
+      padding: 11px 16px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface-card);
+      text-align: center;
+      color: var(--text-dim);
+    }
+    .cascade-table td:first-child {
+      text-align: left;
+      color: var(--text);
+      font-weight: 500;
+    }
+    .cascade-table tr:last-child td { border-bottom: none; }
+    .check { color: #78C4A0; font-size: 15px; }
+    .cross { color: var(--text-faint); font-size: 13px; opacity: 0.5; }
+    .partial { color: var(--gold); font-size: 13px; }
+
+    /* ── Sprint Timeline ── */
+    .sprint-grid { display: flex; flex-direction: column; gap: 4px; }
+    .sprint-row {
+      display: grid;
+      grid-template-columns: 140px 1fr 160px;
+      gap: 16px;
+      padding: 16px 20px;
+      background: var(--surface-card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      align-items: center;
+    }
+    .sprint-phase {
+      font-family: -apple-system, sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .sprint-phase.phase-1 { color: var(--bespoke); }
+    .sprint-phase.phase-2 { color: var(--luxe); }
+    .sprint-phase.phase-3 { color: var(--prestige); }
+    .sprint-phase.phase-4 { color: var(--signature); }
+    .sprint-phase.phase-5 { color: var(--essential); }
+    .sprint-phase.phase-go { color: #78C4A0; }
+    .sprint-desc { font-family: -apple-system, sans-serif; font-size: 13.5px; color: var(--text); }
+    .sprint-desc .sprint-sub { display: block; font-size: 12px; color: var(--text-faint); margin-top: 2px; }
+    .sprint-weeks {
+      font-family: -apple-system, sans-serif;
+      font-size: 12px;
+      color: var(--text-faint);
+      text-align: right;
+    }
+
+    /* ── Revenue Table ── */
+    .rev-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-family: -apple-system, sans-serif;
+      font-size: 13px;
+    }
+    .rev-table th {
+      padding: 12px 16px;
+      text-align: right;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--surface-raised);
+      color: var(--text-faint);
+      border-bottom: 1px solid var(--border);
+    }
+    .rev-table th:first-child, .rev-table th:nth-child(2) { text-align: left; }
+    .rev-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface-card);
+      text-align: right;
+      color: var(--text-dim);
+      font-size: 13px;
+    }
+    .rev-table td:first-child { text-align: left; font-weight: 600; color: var(--text); }
+    .rev-table td:nth-child(2) { text-align: left; color: var(--text-dim); }
+    .rev-table tr:last-child td { border-bottom: none; background: var(--surface-raised); font-weight: 700; color: var(--gold-light); }
+
+    /* ── Ramp Chart ── */
+    .ramp-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .ramp-col {
+      background: var(--surface-card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 20px 14px;
+      text-align: center;
+    }
+    .ramp-month {
+      font-family: -apple-system, sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 10px;
+    }
+    .ramp-bar-wrap {
+      height: 80px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+    .ramp-bar {
+      width: 100%;
+      border-radius: 4px 4px 0 0;
+      background: linear-gradient(to top, rgba(201,169,110,0.6), rgba(201,169,110,0.2));
+      border: 1px solid rgba(201,169,110,0.3);
+      border-bottom: none;
+      transition: height 0.3s ease;
+    }
+    .ramp-rev {
+      font-family: -apple-system, sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gold-light);
+    }
+    .ramp-rev-sub {
+      font-family: -apple-system, sans-serif;
+      font-size: 11px;
+      color: var(--text-faint);
+      margin-top: 2px;
+    }
+
+    /* ── Tech Stack ── */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .tech-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+    .tech-card-tier {
+      font-family: -apple-system, sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .tech-card h4 {
+      font-family: -apple-system, sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .tech-card p {
+      font-family: -apple-system, sans-serif;
+      font-size: 12px;
+      color: var(--text-faint);
+      line-height: 1.5;
+    }
+
+    /* ── Callout ── */
+    .callout {
+      background: rgba(201,169,110,0.06);
+      border: 1px solid rgba(201,169,110,0.2);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      font-family: -apple-system, sans-serif;
+      font-size: 14px;
+      color: var(--gold-light);
+      line-height: 1.6;
+      margin: 24px 0;
+    }
+    .callout strong { color: var(--gold); }
+
+    /* ── Principle Cards ── */
+    .principle-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .principle-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+    .principle-number {
+      font-size: 32px;
+      color: rgba(201,169,110,0.2);
+      font-family: -apple-system, sans-serif;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .principle-card h4 {
+      font-family: -apple-system, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gold-light);
+      margin-bottom: 8px;
+    }
+    .principle-card p {
+      font-family: -apple-system, sans-serif;
+      font-size: 13px;
+      color: var(--text-faint);
+      line-height: 1.6;
+    }
+
+    /* ── Marketing ── */
+    .channel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .channel-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+    }
+    .channel-card h4 {
+      font-family: -apple-system, sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .channel-card h4 .ch-icon { font-size: 18px; }
+    .channel-card p {
+      font-family: -apple-system, sans-serif;
+      font-size: 12.5px;
+      color: var(--text-faint);
+      line-height: 1.6;
+    }
+    .channel-priority {
+      display: inline-block;
+      font-family: -apple-system, sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+    .pri-high { background: rgba(201,169,110,0.15); color: var(--gold); }
+    .pri-med  { background: rgba(109,213,208,0.1); color: var(--prestige); }
+    .pri-low  { background: rgba(90,86,114,0.3); color: var(--text-dim); }
+
+    /* ── Footer ── */
+    .plan-footer {
+      text-align: center;
+      padding: 60px 32px;
+      font-family: -apple-system, sans-serif;
+      font-size: 13px;
+      color: var(--text-faint);
+    }
+    .plan-footer strong { color: var(--gold); font-size: 20px; display: block; margin-bottom: 8px; font-weight: 300; font-family: Georgia, serif; }
+
+    /* ── Nav ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13,13,18,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+    }
+    .nav-inner {
+      max-width: 1060px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      height: 52px;
+      overflow-x: auto;
+    }
+    .nav a {
+      font-family: -apple-system, sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-faint);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      white-space: nowrap;
+      transition: color 0.15s, background 0.15s;
+    }
+    .nav a:hover { color: var(--gold-light); background: rgba(201,169,110,0.07); }
+    .nav-brand {
+      font-size: 13px;
+      color: var(--gold);
+      font-family: Georgia, serif;
+      margin-right: 12px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .nav-sep { color: var(--text-faint); opacity: 0.3; }
+
+    /* ── Toc numbers ── */
+    .toc-num {
+      display: inline-block;
+      font-family: -apple-system, sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-faint);
+      margin-right: 8px;
+      opacity: 0.6;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 40px 0;
+    }
+
+    hr.gold-line {
+      border: none;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+      margin: 48px 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-brand">Wedding Websites</span>
+    <span class="nav-sep">|</span>
+    <a href="#overview">Overview</a>
+    <a href="#tiers">Tier Architecture</a>
+    <a href="#specs">Tier Specs</a>
+    <a href="#cascade">Feature Cascade</a>
+    <a href="#build">Build Sequence</a>
+    <a href="#tech">Tech Stack</a>
+    <a href="#revenue">Revenue Model</a>
+    <a href="#marketing">Marketing</a>
+    <a href="#principles">Principles</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow">Master Build Plan · Top-Down Approach</div>
+    <h1>Build the Best First.<br><span>Then Cascade Down.</span></h1>
+    <p class="hero-sub">
+      One codebase philosophy. Five tiers. A $100k/month business in 3–6 months. Every feature built for Bespoke filters down — each tier is a deliberate, focused downgrade of the one above it.
+    </p>
+    <div class="goal-pills">
+      <span class="pill">5 Tiers</span>
+      <span class="pill">Top-Down Development</span>
+      <span class="pill">$100k / Month Target</span>
+      <span class="pill">3–6 Month Ramp</span>
+      <span class="pill">One Codebase Per Tier</span>
+    </div>
+  </div>
+</header>
+
+<!-- SECTION 1: OVERVIEW -->
+<section class="section" id="overview">
+  <div class="wrap">
+    <div class="section-label">01 — Overview</div>
+    <h2 class="section-title">The Top-Down Strategy</h2>
+    <p class="section-intro">
+      Build the crown jewel first. Everything else becomes a deliberate simplification of what came before — not a build-up from scratch, but a disciplined peel-back of the highest tier.
+    </p>
+
+    <div class="principle-grid">
+      <div class="principle-card">
+        <div class="principle-number">01</div>
+        <h4>Build Bespoke First</h4>
+        <p>Bespoke is the reference implementation. Every feature that exists in any lower tier was first designed and built here. Nothing is invented for a lower tier that wasn't already in Bespoke.</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-number">02</div>
+        <h4>Cascade Down</h4>
+        <p>Each tier is Bespoke with things removed — not Essential with things added. This means every tier shares a common design DNA. Lower tiers feel like "simplified luxury," not "budget alternatives."</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-number">03</div>
+        <h4>Template = Scale</h4>
+        <p>Below Bespoke, every tier is a configurable template. New clients are onboarded in hours, not days. The engineering investment is already done — revenue is pure margin.</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-number">04</div>
+        <h4>Premium Anchoring</h4>
+        <p>Bespoke and Luxe are priced to anchor perception. They make Prestige look accessible, Signature look like a bargain, and Essential look like an entry point. The premium tier exists partly to sell the mid tiers.</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-number">05</div>
+        <h4>Spectacular Demos</h4>
+        <p>Every tier needs a jaw-dropping demo client. The demo IS the sales pitch. Before building features, plan and build the demo — it should make people feel something.</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-number">06</div>
+        <h4>Client Turnaround = Moat</h4>
+        <p>The goal is to onboard a new client in under 2 hours per tier (1–3 below Bespoke). Speed of delivery at quality is the defensible advantage. The template system makes this possible.</p>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top: 40px;">
+      <strong>Current state audit:</strong> Essential and Signature are production-ready in v2.0. Prestige is production-ready in v3.0 (11 sections, video hero, 3 exclusive styles, 7 premium presets). Luxe (was "Elite") and Bespoke are both unbuilt. <strong>The entire revenue gap to $100k/month lives in building these two tiers and marketing all five.</strong>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: TIER ARCHITECTURE -->
+<section class="section" id="tiers">
+  <div class="wrap">
+    <div class="section-label">02 — Tier Architecture</div>
+    <h2 class="section-title">The Five Tiers at a Glance</h2>
+    <p class="section-intro">
+      Listed top-to-bottom. The arrow of development is downward — we build from the top and cascade features to each tier below.
+    </p>
+
+    <div class="tier-stack">
+      <div class="tier-row tier-bespoke">
+        <div class="tier-name-block">
+          <span class="tier-name">Bespoke</span>
+          <span class="tier-tag">v5.0 · Custom build</span>
+          <span class="tier-status status-build">To Build</span>
+        </div>
+        <span class="tier-desc">Fully custom multi-page website built from scratch. Private RSVP dashboard, guest management, custom animations, 3D parallax — no template constraints. Every client gets a unique digital experience. Not yet announced.</span>
+        <div class="tier-price">
+          $5,000 – $15,000
+          <span class="price-sub">custom quote per client</span>
+        </div>
+      </div>
+
+      <div class="tier-row tier-luxe">
+        <div class="tier-name-block">
+          <span class="tier-name">Luxe</span>
+          <span class="tier-tag">v4.0 · Premium template</span>
+          <span class="tier-status status-build">To Build</span>
+        </div>
+        <span class="tier-desc">Template-based but with Bespoke-level features packaged: particle animations, password protection, digital guestbook, mini RSVP dashboard, AI content assist, custom domain included. The most accessible luxury tier.</span>
+        <div class="tier-price">
+          $1,997
+          <span class="price-sub">fixed price per client</span>
+        </div>
+      </div>
+
+      <div class="tier-row tier-prestige">
+        <div class="tier-name-block">
+          <span class="tier-name">Prestige</span>
+          <span class="tier-tag">v3.0 · Production ready</span>
+          <span class="tier-status status-enhance">Enhance</span>
+        </div>
+        <span class="tier-desc">11 sections, live countdown, cinematic video hero, 3 exclusive design styles (auroraGlass, velvetNight, immersive3d), 7 exclusive presets. Built and ready — minor positioning enhancements only.</span>
+        <div class="tier-price">
+          $797
+          <span class="price-sub">fixed price per client</span>
+        </div>
+      </div>
+
+      <div class="tier-row tier-signature">
+        <div class="tier-name-block">
+          <span class="tier-name">Signature</span>
+          <span class="tier-tag">v2.0 · Production ready</span>
+          <span class="tier-status status-ready">Ready</span>
+        </div>
+        <span class="tier-desc">11 sections, live countdown, full design library (20 presets, 8 styles, 10 colour schemes, 6 font pairings). Everything guests need: schedule, registry, maps, music requests, FAQ.</span>
+        <div class="tier-price">
+          $397
+          <span class="price-sub">fixed price per client</span>
+        </div>
+      </div>
+
+      <div class="tier-row tier-essential">
+        <div class="tier-name-block">
+          <span class="tier-name">Essential</span>
+          <span class="tier-tag">v2.0 · Production ready</span>
+          <span class="tier-status status-ready">Ready</span>
+        </div>
+        <span class="tier-desc">5 sections (hero, story, details, gallery, RSVP). Beautiful, fast, and complete for couples who just need the essentials. Full mobile responsiveness. Same design library as Signature.</span>
+        <div class="tier-price">
+          $149
+          <span class="price-sub">fixed price per client</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: TIER SPECS -->
+<section class="section" id="specs">
+  <div class="wrap">
+    <div class="section-label">03 — Tier Specifications</div>
+    <h2 class="section-title">What Gets Built in Each Tier</h2>
+    <p class="section-intro">
+      Full feature specification, top to bottom. Bespoke and Luxe are the new builds. Prestige, Signature, and Essential are production-ready with notes on enhancements.
+    </p>
+
+    <!-- BESPOKE -->
+    <div class="tier-detail bespoke">
+      <div class="tier-detail-header">
+        <div>
+          <div style="font-family:-apple-system,sans-serif;font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(201,169,110,0.6);margin-bottom:8px;">Tier 1 — Not Yet Announced</div>
+          <h3 class="tier-detail-title">Bespoke</h3>
+          <div class="tier-detail-tagline">"Built for you, only you. Not a template — a singular digital experience."</div>
+          <span class="tier-status status-build">To Build — v5.0</span>
+        </div>
+        <div class="tier-detail-price-block">
+          <div class="tier-detail-price">$5k – $15k</div>
+          <div class="tier-detail-price-note">Custom quote · avg ~$8,000</div>
+        </div>
+      </div>
+      <div class="tier-detail-body">
+        <div class="feature-group">
+          <h4>Architecture</h4>
+          <ul class="feature-list">
+            <li>Multi-page Next.js 14 app — separate pages per section</li>
+            <li>Supabase backend — RSVP data, guestbook, auth</li>
+            <li>Custom domain setup included (e.g. sophia-and-alex.com)</li>
+            <li>Password-protected access — guests only</li>
+            <li>6 months fully managed hosting on Vercel</li>
+            <li>White-label — zero attribution, no branding</li>
+            <li>Mobile-first, sub-2s load time on all pages</li>
+          </ul>
+        </div>
+        <div class="feature-group">
+          <h4>Visual Experience</h4>
+          <ul class="feature-list">
+            <li>Fully custom design — no template constraints, built to match couple's vision</li>
+            <li>GSAP + ScrollTrigger custom scroll animations</li>
+            <li>3D parallax hero with layered depth (Three.js or CSS 3D)</li>
+            <li>Micro-interaction design — every hover, click, and scroll is intentional</li>
+            <li>Custom animated section transitions — unique per client</li>
+            <li>Cinematic video hero (full-screen loop)</li>
+            <li>Ambient particle system — petals, stars, fireflies, snow — custom per wedding</li>
+          </ul>
+        </div>
+        <div class="feature-group">
+          <h4>RSVP & Guest Management</h4>
+          <ul class="feature-list">
+            <li>Live RSVP management dashboard — couple logs in to see all responses</li>
+            <li>Real-time headcount, dietary requirements, plus-ones</li>
+            <li>Guest list import — CSV or manual entry</li>
+            <li>Digital invitations — send via email or WhatsApp from the dashboard</li>
+            <li>RSVP status tracking — sent, opened, responded</li>
+            <li>CSV export of all guest data</li>
+            <li>WhatsApp & email notifications when a guest RSVPs</li>
+          </ul>
+        </div>
+        <div class="feature-group">
+          <h4>Content & Sections</h4>
+          <ul class="feature-list">
+            <li>All 11 standard sections (hero through FAQ)</li>
+            <li>Digital guestbook — guests leave messages, photos, and memories</li>
+            <li>Interactive story timeline — scroll-driven narrative</li>
+            <li>Custom illustrated venue map — SVG hand-drawn aesthetic</li>
+            <li>Live stream embed — for remote guests on the wedding day</li>
+            <li>Post-wedding gallery update — professional photos published after the event</li>
+            <li>AI-assisted copywriting — story text, vow suggestions, captions generated from prompts</li>
+          </ul>
+        </div>
+        <div class="feature-group">
+          <h4>Support & Delivery</h4>
+          <ul class="feature-list">
+            <li>Dedicated WhatsApp support line throughout the engagement</li>
+            <li>2-revision rounds on design before launch</li>
+            <li>Launch-ready in 5–7 business days from content receipt</li>
+            <li>Priority support on wedding day itself</li>
+            <li>Offboarding package — domain transfer, code export</li>
+          </ul>
+        </div>
+        <div class="feature-group">
+          <h4>What Makes This Spectacular</h4>
+          <ul class="feature-list">
+            <li>No two Bespoke sites look alike — ever</li>
+            <li>Feels like a film, not a website</li>
+            <li>Guests ask "how did they make this?" — that reaction is the product</li>
+            <li>Couple has a real dashboard — feels like a proper product they own</li>
+            <li>AI-generated story copy that reads like it was written by a novelist</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- LUXE -->
+    <div class="tier-detail luxe">
+      <div class="tier-detail-header">
+        <div>
+          <div style="font-family:-apple-system,sans-serif;font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(155,142,196,0.6);margin-bottom:8px;">Tier 2 — Premium Template</div>
+          <h3 class="tier-detail-title">Luxe</h3>
+          <div class="tier-detail-tagline">"Bespoke-level features, packaged as an elite template experience."</div>
+          <span class="tier-status status-build">To Build — v4.0</span>
+        </div>
+        <div class="tier-detail-price-block">
+          <div class="tier-detail-price">$1,997</div>
+          <div class="tier-detail-price-note">Fixed price · fast turnaround</div>
+        </div>
+      </div>
+      <div class="tier-detail-body">
+        <div class="feature-group">
+          <h4>Everything in Prestige, Plus</h4>
+          <ul class="feature-list">
+            <li>Password protection — private, invite-only access</li>
+            <li>Digital guestbook — text messages + emoji reactions from guests</li>
+            <li>Ambient particle animations — falling petals, stars, fireflies, snow <span class="feat-note">(one style, couple's choice)</span></li>
+            <li>Custom domain setup included</li>
+            <li>Mini RSVP dashboard — read-only real-time view of responses</li>
+            <li>WhatsApp RSVP notifications to the couple</li>
+            <li>RSVP CSV export</li>
+            <li>Post-wedding gallery update <span class="feat-note">(one included session)</span></li>
+          </ul>
+        </div>
+        <div class="feature-group">
+          <h4>Exclusive Luxe Design System</h4>
+          <ul class="feature-list">
+            <li>5 exclusive Luxe-only design styles <span class="feat-note">(not available in Prestige or below)</span></li>
+            <li>10 exclusive Luxe presets (Presets 28–37)</li>
+            <li>3 exclusive Luxe colour schemes</li>
+            <li>Enhanced animation quality — smoother, more cinematic scroll effects</li>
+            <li>Particle system on hero section</li>
+          </ul>
+        </div>
+        <div class="feature-group">
+          <h4>Proposed Luxe-Exclusive Design Styles</h4>
+          <ul class="feature-list">
+            <li><strong>sakuraDrift</strong> — Soft pink Japanese blooms, falling petals, watercolour washes</li>
+            <li><strong>grandHotel</strong> — Art Deco geometry, deep burgundy + gold, ornate dividers</li>
+            <li><strong>modernCelestial</strong> — Minimal dark with gold constellation line art, crisp type</li>
+            <li><strong>roseGardenGlass</strong> — Frosted glass panels over rose-garden photography, ultra-feminine</li>
+            <li><strong>editorialLuxe</strong> — High-fashion editorial layout, large typography, stark contrast</li>
+          </ul>
+        </div>
+        <div class="feature-group">
+          <h4>AI Content Assist</h4>
+          <ul class="feature-list">
+            <li>One AI story generation session — couple answers prompts, AI writes the story section</li>
+            <li>AI-suggested section headings and captions</li>
+            <li>FAQ auto-generation from common wedding questions</li>
+          </ul>
+        </div>
+        <div class="feature-group">
+          <h4>What Makes This Spectacular</h4>
+          <ul class="feature-list">
+            <li>Particle animations make the hero feel alive — not just a photo</li>
+            <li>Password protection makes guests feel VIP — access to something exclusive</li>
+            <li>Couple gets a real-time view of RSVPs — feels modern, not static</li>
+            <li>Guestbook messages visible to all guests — social, living document</li>
+            <li>Art Deco / editorial styles feel unlike anything in the wedding website market</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRESTIGE -->
+    <div class="tier-detail prestige">
+      <div class="tier-detail-header">
+        <div>
+          <div style="font-family:-apple-system,sans-serif;font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(109,213,208,0.55);margin-bottom:8px;">Tier 3 — Production Ready</div>
+          <h3 class="tier-detail-title">Prestige</h3>
+          <div class="tier-detail-tagline">"An experience as extraordinary as your wedding."</div>
+          <span class="tier-status status-enhance">Enhance Only — v3.0</span>
+        </div>
+        <div class="tier-detail-price-block">
+          <div class="tier-detail-price">$797</div>
+          <div class="tier-detail-price-note">Fixed price · 2–4hr onboarding</div>
+        </div>
+      </div>
+      <div class="tier-detail-body">
+        <div class="feature-group">
+          <h4>Already Built</h4>
+          <ul class="feature-list">
+            <li>11 sections — hero through FAQ</li>
+            <li>Live countdown timer (days, hours, minutes, seconds)</li>
+            <li>Cinematic video hero background</li>
+            <li>3 exclusive design styles: auroraGlass, velvetNight, immersive3d</li>
+            <li>3 premium colour schemes: cosmicGold, auroraBlue, velvetNight</li>
+            <li>7 exclusive presets (#21–27): cosmicLuxe, darkVelvet, auroraWedding, velvetRose, celestialDawn, starCrossed, crystalAurora</li>
+            <li>27 total presets, 11 styles, 13 colour schemes, 6 font pairings</li>
+          </ul>
+        </div>
+        <div class="feature-group">
+          <h4>Enhancements to Add</h4>
+          <ul class="feature-list">
+            <li>Improve Prestige demo client — make Sofia & Alexander demo more spectacular</li>
+            <li>Add 2 more exclusive Prestige presets (#28–29 when Luxe pushes the count up)</li>
+            <li>Ensure clear visual differentiation from Luxe — Prestige is about visual drama, Luxe about features</li>
+            <li>Update client-facing copy to reinforce positioning relative to Luxe</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIGNATURE -->
+    <div class="tier-detail signature">
+      <div class="tier-detail-header">
+        <div>
+          <div style="font-family:-apple-system,sans-serif;font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(232,135,160,0.55);margin-bottom:8px;">Tier 4 — Production Ready</div>
+          <h3 class="tier-detail-title">Signature</h3>
+          <div class="tier-detail-tagline">"The complete wedding companion your guests will love."</div>
+          <span class="tier-status status-ready">Ready — v2.0</span>
+        </div>
+        <div class="tier-detail-price-block">
+          <div class="tier-detail-price">$397</div>
+          <div class="tier-detail-price-note">Fixed price · 1–2hr onboarding</div>
+        </div>
+      </div>
+      <div class="tier-detail-body">
+        <div class="feature-group">
+          <h4>Already Built</h4>
+          <ul class="feature-list">
+            <li>11 sections — hero through FAQ</li>
+            <li>Live countdown timer</li>
+            <li>20 presets, 8 design styles, 10 colour schemes, 6 font pairings</li>
+            <li>Schedule, Registry, Location/Maps, Accommodation, Music Requests, FAQ</li>
+            <li>RSVP with meal preferences via Formspree</li>
+          </ul>
+        </div>
+        <div class="feature-group">
+          <h4>No Changes Needed</h4>
+          <ul class="feature-list">
+            <li>Production-ready, no new build work required</li>
+            <li>Focus is on marketing and demo quality</li>
+            <li>Consider refreshing the Isabella & James demo to showcase best-in-class preset</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESSENTIAL -->
+    <div class="tier-detail essential">
+      <div class="tier-detail-header">
+        <div>
+          <div style="font-family:-apple-system,sans-serif;font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(120,196,160,0.55);margin-bottom:8px;">Tier 5 — Production Ready</div>
+          <h3 class="tier-detail-title">Essential</h3>
+          <div class="tier-detail-tagline">"Your love story, beautifully told online."</div>
+          <span class="tier-status status-ready">Ready — v2.0</span>
+        </div>
+        <div class="tier-detail-price-block">
+          <div class="tier-detail-price">$149</div>
+          <div class="tier-detail-price-note">Fixed price · under 1hr onboarding</div>
+        </div>
+      </div>
+      <div class="tier-detail-body">
+        <div class="feature-group">
+          <h4>Already Built</h4>
+          <ul class="feature-list">
+            <li>5 sections — hero, story, details, gallery, RSVP</li>
+            <li>20 presets, 8 styles, 10 colour schemes, 6 font pairings</li>
+            <li>RSVP form, Formspree</li>
+            <li>Full mobile responsiveness</li>
+          </ul>
+        </div>
+        <div class="feature-group">
+          <h4>Role in the Business</h4>
+          <ul class="feature-list">
+            <li>Entry-point offer — lowest friction to convert a lead</li>
+            <li>High volume, low effort — onboard in under an hour</li>
+            <li>Acts as a funnel for upsells — couples who start here often want more</li>
+            <li>No changes needed. Marketing only.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECTION 4: FEATURE CASCADE TABLE -->
+<section class="section" id="cascade">
+  <div class="wrap">
+    <div class="section-label">04 — Feature Cascade</div>
+    <h2 class="section-title">What Each Tier Inherits</h2>
+    <p class="section-intro">
+      Every feature in a lower tier already exists in all tiers above it. The cascade is strictly downward — no feature is added to a lower tier that doesn't exist above.
+    </p>
+
+    <div style="overflow-x:auto;">
+      <table class="cascade-table">
+        <thead>
+          <tr>
+            <th style="text-align:left; min-width:220px;">Feature</th>
+            <th>Bespoke</th>
+            <th>Luxe</th>
+            <th>Prestige</th>
+            <th>Signature</th>
+            <th>Essential</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="6" style="background:var(--surface-raised);color:var(--text-faint);font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:8px 16px;">Sections</td></tr>
+          <tr><td>5 core sections (hero, story, details, gallery, RSVP)</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+          <tr><td>Extended sections (+6: schedule, registry, location, accommodation, music, FAQ)</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="cross">—</td></tr>
+          <tr><td>Digital guestbook section</td><td class="check">✓</td><td class="partial">~</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td></tr>
+          <tr><td>Live stream embed</td><td class="check">✓</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td></tr>
+
+          <tr><td colspan="6" style="background:var(--surface-raised);color:var(--text-faint);font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:8px 16px;">Design</td></tr>
+          <tr><td>20 standard presets</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+          <tr><td>8 standard design styles</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+          <tr><td>3 exclusive Prestige styles (auroraGlass, velvetNight, immersive3d)</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="cross">—</td><td class="cross">—</td></tr>
+          <tr><td>5 exclusive Luxe styles (sakuraDrift, grandHotel, etc.)</td><td class="check">✓</td><td class="check">✓</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td></tr>
+          <tr><td>Custom design (no template)</td><td class="check">✓</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td></tr>
+
+          <tr><td colspan="6" style="background:var(--surface-raised);color:var(--text-faint);font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:8px 16px;">Animations & Effects</td></tr>
+          <tr><td>Framer Motion scroll animations</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+          <tr><td>Cinematic video hero background</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="cross">—</td><td class="cross">—</td></tr>
+          <tr><td>Ambient particle system (petals, stars, snow)</td><td class="check">✓</td><td class="check">✓</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td></tr>
+          <tr><td>3D parallax hero (Three.js / CSS 3D)</td><td class="check">✓</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td></tr>
+          <tr><td>GSAP custom scroll animations</td><td class="check">✓</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td></tr>
+
+          <tr><td colspan="6" style="background:var(--surface-raised);color:var(--text-faint);font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:8px 16px;">RSVP & Guest Management</td></tr>
+          <tr><td>RSVP form (Formspree)</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+          <tr><td>WhatsApp notification on RSVP</td><td class="check">✓</td><td class="check">✓</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td></tr>
+          <tr><td>Mini RSVP dashboard (read-only, Supabase)</td><td class="check">✓</td><td class="check">✓</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td></tr>
+          <tr><td>Full RSVP management dashboard</td><td class="check">✓</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td></tr>
+          <tr><td>Digital guest invitations (send from dashboard)</td><td class="check">✓</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td></tr>
+          <tr><td>RSVP CSV export</td><td class="check">✓</td><td class="check">✓</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td></tr>
+
+          <tr><td colspan="6" style="background:var(--surface-raised);color:var(--text-faint);font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:8px 16px;">Access & Hosting</td></tr>
+          <tr><td>Password-protected access</td><td class="check">✓</td><td class="check">✓</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td></tr>
+          <tr><td>Custom domain setup included</td><td class="check">✓</td><td class="check">✓</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td></tr>
+          <tr><td>6-month managed hosting included</td><td class="check">✓</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td></tr>
+          <tr><td>White-label (no attribution)</td><td class="check">✓</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td></tr>
+
+          <tr><td colspan="6" style="background:var(--surface-raised);color:var(--text-faint);font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:8px 16px;">AI & Content</td></tr>
+          <tr><td>AI story + caption generation</td><td class="check">✓</td><td class="check">✓</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td></tr>
+          <tr><td>Post-wedding gallery update included</td><td class="check">✓</td><td class="check">✓</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td></tr>
+          <tr><td>Live countdown timer</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="cross">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-family:-apple-system,sans-serif;font-size:12px;color:var(--text-faint);margin-top:12px;">✓ Included &nbsp;·&nbsp; ~ Simplified version &nbsp;·&nbsp; — Not included</p>
+  </div>
+</section>
+
+<!-- SECTION 5: BUILD SEQUENCE -->
+<section class="section" id="build">
+  <div class="wrap">
+    <div class="section-label">05 — Build Sequence</div>
+    <h2 class="section-title">Sprint Plan — Top to Bottom</h2>
+    <p class="section-intro">
+      14 focused sprints across ~14 weeks. Bespoke ships first so the anchor tier is live. Luxe follows immediately — it inherits most of Bespoke's infrastructure. Prestige, Signature, and Essential are already done.
+    </p>
+
+    <div class="sprint-grid">
+      <!-- PHASE: BESPOKE -->
+      <div class="sprint-row">
+        <span class="sprint-phase phase-1">Bespoke · S1</span>
+        <div class="sprint-desc">Architecture & tech stack decision
+          <span class="sprint-sub">Next.js 14 setup, Supabase schema design, design system tokens, folder structure, CI/CD pipeline on Vercel</span>
+        </div>
+        <span class="sprint-weeks">Week 1</span>
+      </div>
+      <div class="sprint-row">
+        <span class="sprint-phase phase-1">Bespoke · S2</span>
+        <div class="sprint-desc">RSVP dashboard (Supabase + Next.js Auth)
+          <span class="sprint-sub">Couple login, real-time RSVP table, headcount, dietary, CSV export, WhatsApp notification via Twilio</span>
+        </div>
+        <span class="sprint-weeks">Week 2</span>
+      </div>
+      <div class="sprint-row">
+        <span class="sprint-phase phase-1">Bespoke · S3</span>
+        <div class="sprint-desc">Core animation system (GSAP + Three.js base)
+          <span class="sprint-sub">ScrollTrigger setup, 3D parallax hero component, particle engine (canvas-based), custom page transitions</span>
+        </div>
+        <span class="sprint-weeks">Week 3</span>
+      </div>
+      <div class="sprint-row">
+        <span class="sprint-phase phase-1">Bespoke · S4</span>
+        <div class="sprint-desc">All section components (multi-page)
+          <span class="sprint-sub">11 standard sections + Guestbook + Story Timeline, each as standalone Next.js pages with GSAP scroll animations</span>
+        </div>
+        <span class="sprint-weeks">Week 4</span>
+      </div>
+      <div class="sprint-row">
+        <span class="sprint-phase phase-1">Bespoke · S5</span>
+        <div class="sprint-desc">Guest management + digital invitations
+          <span class="sprint-sub">Import guest list, send WhatsApp/email invites, track open/RSVP status. Resend (email API) + Twilio (WhatsApp)</span>
+        </div>
+        <span class="sprint-weeks">Week 5</span>
+      </div>
+      <div class="sprint-row">
+        <span class="sprint-phase phase-1">Bespoke · S6</span>
+        <div class="sprint-desc">Build the Bespoke demo client
+          <span class="sprint-sub">A jaw-dropping fictional couple — custom 3D hero, GSAP story timeline, particle petals, guestbook, full dashboard. This demo IS the sales pitch.</span>
+        </div>
+        <span class="sprint-weeks">Week 6</span>
+      </div>
+
+      <!-- PHASE: LUXE -->
+      <div class="sprint-row">
+        <span class="sprint-phase phase-2">Luxe · S7</span>
+        <div class="sprint-desc">v4.0 template base — inherit Prestige v3.0 + add particles
+          <span class="sprint-sub">Fork Prestige v3.0 as Luxe base. Add canvas particle engine (port from Bespoke). Password protection (simple JWT or Next.js middleware).</span>
+        </div>
+        <span class="sprint-weeks">Week 7</span>
+      </div>
+      <div class="sprint-row">
+        <span class="sprint-phase phase-2">Luxe · S8</span>
+        <div class="sprint-desc">Mini RSVP dashboard + WhatsApp + Guestbook
+          <span class="sprint-sub">Port simplified versions from Bespoke. Supabase for guestbook messages. Twilio webhook for WhatsApp pings. Read-only dashboard component.</span>
+        </div>
+        <span class="sprint-weeks">Week 8</span>
+      </div>
+      <div class="sprint-row">
+        <span class="sprint-phase phase-2">Luxe · S9</span>
+        <div class="sprint-desc">5 exclusive Luxe design styles + 10 new presets
+          <span class="sprint-sub">sakuraDrift, grandHotel, modernCelestial, roseGardenGlass, editorialLuxe. 10 new presets (#28–37). AI content generation integration (Claude API via server action).</span>
+        </div>
+        <span class="sprint-weeks">Week 9</span>
+      </div>
+      <div class="sprint-row">
+        <span class="sprint-phase phase-2">Luxe · S10</span>
+        <div class="sprint-desc">Build the Luxe demo client
+          <span class="sprint-sub">Stunning fictional couple in grandHotel or sakuraDrift style. Particle petals on scroll. Guestbook populated with demo messages. Password: "luxe2027". Post-wedding gallery section.</span>
+        </div>
+        <span class="sprint-weeks">Week 10</span>
+      </div>
+
+      <!-- PHASE: PRESTIGE ENHANCE -->
+      <div class="sprint-row">
+        <span class="sprint-phase phase-3">Prestige · S11</span>
+        <div class="sprint-desc">Enhance Prestige demo + positioning
+          <span class="sprint-sub">Rebuild Sofia & Alexander demo to be more spectacular. Add 2 new Prestige-exclusive presets. Update client-facing copy to clearly differentiate from Luxe.</span>
+        </div>
+        <span class="sprint-weeks">Week 11</span>
+      </div>
+
+      <!-- PHASE: MARKETING -->
+      <div class="sprint-row">
+        <span class="sprint-phase phase-go">Launch · S12</span>
+        <div class="sprint-desc">Marketing site + pricing page
+          <span class="sprint-sub">Beautiful landing page showing all 5 tiers with live demo links. SEO-optimised. Lead capture form. "Request a quote" CTA. Mobile-first.</span>
+        </div>
+        <span class="sprint-weeks">Week 12</span>
+      </div>
+      <div class="sprint-row">
+        <span class="sprint-phase phase-go">Launch · S13</span>
+        <div class="sprint-desc">Client intake + onboarding system
+          <span class="sprint-sub">Content intake form (Tally or Notion form). Client folder template. Deployment checklist per tier. Stripe payment links per tier. Welcome email sequence.</span>
+        </div>
+        <span class="sprint-weeks">Week 13</span>
+      </div>
+      <div class="sprint-row">
+        <span class="sprint-phase phase-go">Launch · S14</span>
+        <div class="sprint-desc">First real clients + refine
+          <span class="sprint-sub">Onboard first 3–5 clients across tiers. Collect feedback. Refine intake process. Begin social content pipeline. Submit to wedding directories.</span>
+        </div>
+        <span class="sprint-weeks">Week 14</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6: TECH STACK -->
+<section class="section" id="tech">
+  <div class="wrap">
+    <div class="section-label">06 — Technical Architecture</div>
+    <h2 class="section-title">Stack Decisions</h2>
+    <p class="section-intro">
+      Each tier uses the right level of technology. Bespoke gets everything. Each tier below gets a simplified stack. No over-engineering on lower tiers — keep them fast and onboard-able.
+    </p>
+
+    <div class="tech-grid">
+      <div class="tech-card">
+        <div class="tech-card-tier" style="color:var(--bespoke)">Bespoke — Framework</div>
+        <h4>Next.js 14 (App Router)</h4>
+        <p>Multi-page architecture. Server components for performance. API routes for RSVP dashboard. Vercel deployment, edge functions for auth.</p>
+      </div>
+      <div class="tech-card">
+        <div class="tech-card-tier" style="color:var(--bespoke)">Bespoke — Backend</div>
+        <h4>Supabase</h4>
+        <p>PostgreSQL for RSVPs, guestbook, guest list. Row-level security per couple. Realtime subscriptions for dashboard live updates. Auth for couple login.</p>
+      </div>
+      <div class="tech-card">
+        <div class="tech-card-tier" style="color:var(--bespoke)">Bespoke — Animations</div>
+        <h4>GSAP + Three.js</h4>
+        <p>ScrollTrigger for scroll-driven animations. Three.js for 3D parallax hero scenes. Custom canvas particle engine for petals/stars. Framer Motion for UI micro-interactions.</p>
+      </div>
+      <div class="tech-card">
+        <div class="tech-card-tier" style="color:var(--bespoke)">Bespoke — Communications</div>
+        <h4>Resend + Twilio</h4>
+        <p>Resend for transactional emails (invitations, RSVP confirmations). Twilio WhatsApp Business API for RSVP push notifications to the couple.</p>
+      </div>
+      <div class="tech-card">
+        <div class="tech-card-tier" style="color:var(--bespoke)">Bespoke — AI</div>
+        <h4>Claude API (Anthropic)</h4>
+        <p>Story generation from couple's prompts. Caption writing. FAQ generation. Invoked via Next.js API route with structured prompts. Haiku model for speed, Sonnet for quality.</p>
+      </div>
+      <div class="tech-card">
+        <div class="tech-card-tier" style="color:var(--bespoke)">Bespoke — Media</div>
+        <h4>Cloudinary</h4>
+        <p>Image optimisation (auto WebP, responsive sizing). Video hosting for hero backgrounds. Guestbook photo uploads. CDN delivery worldwide.</p>
+      </div>
+      <div class="tech-card">
+        <div class="tech-card-tier" style="color:var(--luxe)">Luxe + Prestige — Framework</div>
+        <h4>React + Vite</h4>
+        <p>Same codebase pattern as current Prestige v3.0. CLIENT= env var drives config. Fast build, simple deployment. Single-page app. Works perfectly for template-based delivery.</p>
+      </div>
+      <div class="tech-card">
+        <div class="tech-card-tier" style="color:var(--luxe)">Luxe — Backend (light)</div>
+        <h4>Supabase (simple)</h4>
+        <p>Single table for guestbook messages. Single table for RSVP responses. Anon key in client — no auth needed for guests to submit. Couple gets read-only dashboard URL.</p>
+      </div>
+      <div class="tech-card">
+        <div class="tech-card-tier" style="color:var(--luxe)">Luxe — Particles</div>
+        <h4>Custom Canvas Engine</h4>
+        <p>Lightweight vanilla JS canvas-based particle system ported from Bespoke. No heavy library dependency. Four presets: petals, stars, fireflies, snow. Toggle in appsettings.js.</p>
+      </div>
+      <div class="tech-card">
+        <div class="tech-card-tier" style="color:var(--prestige)">Prestige &amp; Below — Forms</div>
+        <h4>Formspree</h4>
+        <p>Zero-backend RSVP and music request forms. No infrastructure to manage. Reliable, fast, free tier covers most clients. Results emailed to couple directly.</p>
+      </div>
+      <div class="tech-card">
+        <div class="tech-card-tier" style="color:var(--prestige)">All Tiers — Hosting</div>
+        <h4>Vercel</h4>
+        <p>Single Vercel account hosts all client sites. Per-project deployments. Edge CDN. Free tier covers Essential/Signature. Pro plan (~$20/mo) covers unlimited Prestige/Luxe sites.</p>
+      </div>
+      <div class="tech-card">
+        <div class="tech-card-tier" style="color:var(--essential)">All Tiers — Payments</div>
+        <h4>Stripe</h4>
+        <p>Payment links per tier (no complex checkout flow needed). 50% upfront, 50% on delivery. Stripe handles invoicing. Minimal setup, professional experience.</p>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top: 32px;">
+      <strong>The client config convention stays:</strong> For Luxe, Prestige, Signature, and Essential — every client is a folder with an <code style="background:rgba(255,255,255,0.08);padding:1px 5px;border-radius:3px;font-size:13px;">appsettings.js</code>. Run with <code style="background:rgba(255,255,255,0.08);padding:1px 5px;border-radius:3px;font-size:13px;">CLIENT=client-name npm run dev</code>. Deploy with <code style="background:rgba(255,255,255,0.08);padding:1px 5px;border-radius:3px;font-size:13px;">CLIENT=client-name npm run build</code>. The system that makes the business scalable is already designed — we just extend it upward.
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7: REVENUE MODEL -->
+<section class="section" id="revenue">
+  <div class="wrap">
+    <div class="section-label">07 — Revenue Model</div>
+    <h2 class="section-title">Path to $100k / Month</h2>
+    <p class="section-intro">
+      The math works on volume + premium mix. Bespoke anchors at the top. Luxe is the volume-revenue engine. Prestige is the sweet spot. Signature and Essential fill the pipeline.
+    </p>
+
+    <div style="overflow-x:auto; margin-bottom: 40px;">
+      <table class="rev-table">
+        <thead>
+          <tr>
+            <th>Tier</th>
+            <th>Price</th>
+            <th>M1</th>
+            <th>M2</th>
+            <th>M3</th>
+            <th>M4</th>
+            <th>M5</th>
+            <th>M6</th>
+            <th>M6 Revenue</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="color:var(--bespoke)">Bespoke</td>
+            <td>avg $8,000</td>
+            <td>0</td>
+            <td>1</td>
+            <td>2</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+            <td>$48,000</td>
+          </tr>
+          <tr>
+            <td style="color:var(--luxe)">Luxe</td>
+            <td>$1,997</td>
+            <td>0</td>
+            <td>2</td>
+            <td>5</td>
+            <td>8</td>
+            <td>12</td>
+            <td>14</td>
+            <td>$27,958</td>
+          </tr>
+          <tr>
+            <td style="color:var(--prestige)">Prestige</td>
+            <td>$797</td>
+            <td>2</td>
+            <td>5</td>
+            <td>10</td>
+            <td>15</td>
+            <td>18</td>
+            <td>20</td>
+            <td>$15,940</td>
+          </tr>
+          <tr>
+            <td style="color:var(--signature)">Signature</td>
+            <td>$397</td>
+            <td>3</td>
+            <td>8</td>
+            <td>12</td>
+            <td>18</td>
+            <td>22</td>
+            <td>22</td>
+            <td>$8,734</td>
+          </tr>
+          <tr>
+            <td style="color:var(--essential)">Essential</td>
+            <td>$149</td>
+            <td>5</td>
+            <td>10</td>
+            <td>15</td>
+            <td>15</td>
+            <td>15</td>
+            <td>15</td>
+            <td>$2,235</td>
+          </tr>
+          <tr>
+            <td>TOTAL</td>
+            <td>—</td>
+            <td>$2,339</td>
+            <td>$13,961</td>
+            <td>$33,919</td>
+            <td>$61,731</td>
+            <td>$84,153</td>
+            <td>$102,867</td>
+            <td style="color:var(--gold); font-size:15px;">$102,867</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Revenue ramp chart -->
+    <div class="ramp-grid">
+      <div class="ramp-col">
+        <div class="ramp-month">Month 1</div>
+        <div class="ramp-bar-wrap"><div class="ramp-bar" style="height: 2%"></div></div>
+        <div class="ramp-rev">$2.3k</div>
+        <div class="ramp-rev-sub">Prestige + Signature + Essential go-live, first sales</div>
+      </div>
+      <div class="ramp-col">
+        <div class="ramp-month">Month 2</div>
+        <div class="ramp-bar-wrap"><div class="ramp-bar" style="height: 14%"></div></div>
+        <div class="ramp-rev">$14k</div>
+        <div class="ramp-rev-sub">Bespoke + Luxe launch, first high-ticket sales</div>
+      </div>
+      <div class="ramp-col">
+        <div class="ramp-month">Month 3</div>
+        <div class="ramp-bar-wrap"><div class="ramp-bar" style="height: 33%"></div></div>
+        <div class="ramp-rev">$34k</div>
+        <div class="ramp-rev-sub">Volume building, referrals begin, social content gaining traction</div>
+      </div>
+      <div class="ramp-col">
+        <div class="ramp-month">Month 4</div>
+        <div class="ramp-bar-wrap"><div class="ramp-bar" style="height: 60%"></div></div>
+        <div class="ramp-rev">$62k</div>
+        <div class="ramp-rev-sub">Bespoke demand grows as demo reputation spreads</div>
+      </div>
+      <div class="ramp-col">
+        <div class="ramp-month">Month 5</div>
+        <div class="ramp-bar-wrap"><div class="ramp-bar" style="height: 82%"></div></div>
+        <div class="ramp-rev">$84k</div>
+        <div class="ramp-rev-sub">Approaching target, Luxe at volume, waitlist starts</div>
+      </div>
+      <div class="ramp-col" style="border-color:rgba(201,169,110,0.4);">
+        <div class="ramp-month" style="color:var(--gold)">Month 6 🎯</div>
+        <div class="ramp-bar-wrap"><div class="ramp-bar" style="height: 100%; background: linear-gradient(to top, var(--gold), rgba(201,169,110,0.4));"></div></div>
+        <div class="ramp-rev" style="color:var(--gold)">$103k</div>
+        <div class="ramp-rev-sub" style="color:var(--gold-dim)">Target achieved. 6 Bespoke, 14 Luxe, 20 Prestige, 22 Signature, 15 Essential</div>
+      </div>
+    </div>
+
+    <hr class="gold-line">
+
+    <h3 style="font-size:20px;color:var(--gold-light);margin-bottom:16px;">Pricing Rationale</h3>
+    <div class="principle-grid">
+      <div class="principle-card">
+        <h4>Bespoke at $5k–$15k</h4>
+        <p>Custom builds take 40–60 hours. At $8k average, that's ~$130–200/hr — competitive for a premium boutique service. The RSVP dashboard, AI content, and custom animations justify the ceiling. Clients who want this have the budget.</p>
+      </div>
+      <div class="principle-card">
+        <h4>Luxe at $1,997</h4>
+        <p>Under $2,000 is psychologically important. The price clears in minutes against the cost of a florist or photographer. Luxe includes password protection, a domain, particles, a guestbook, and a mini dashboard — genuinely worth far more than $2k to the couple.</p>
+      </div>
+      <div class="principle-card">
+        <h4>Prestige at $797</h4>
+        <p>The single-page luxury tier. Priced to be aspirational but clearly accessible. Video hero + exclusive design styles + 11 sections is a genuine premium product. The ~$800 price point is far below wedding photography — an easy yes for engaged couples.</p>
+      </div>
+      <div class="principle-card">
+        <h4>Signature at $397</h4>
+        <p>11 sections, countdown, full design library. More features than any competitor at this price. Designed to be the "obvious upgrade" from Essential when clients see the side-by-side. Upsell rate from Essential → Signature should be high.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8: MARKETING -->
+<section class="section" id="marketing">
+  <div class="wrap">
+    <div class="section-label">08 — Client Acquisition</div>
+    <h2 class="section-title">How We Get to 77 Clients / Month</h2>
+    <p class="section-intro">
+      The product sells itself when the demos are spectacular. The strategy is to let the demos do the work — and distribute them everywhere couples look when planning a wedding.
+    </p>
+
+    <div class="channel-grid">
+      <div class="channel-card">
+        <span class="channel-priority pri-high">Highest Priority</span>
+        <h4><span class="ch-icon">📸</span> Instagram &amp; Pinterest Reels</h4>
+        <p>Post screen-capture videos of each tier's demo. The particle animations, video hero, and 3D effects are inherently scroll-stopping content. "This is a wedding website" hooks are proven to perform. Target: 3 posts/week per tier on launch.</p>
+      </div>
+      <div class="channel-card">
+        <span class="channel-priority pri-high">Highest Priority</span>
+        <h4><span class="ch-icon">🌐</span> Live Demo Links</h4>
+        <p>Every tier has a publicly shareable demo URL. Couples share it themselves — it's word of mouth built into the product. "Look what we found for our wedding website" spreads faster than any ad. The demos must be jaw-dropping.</p>
+      </div>
+      <div class="channel-card">
+        <span class="channel-priority pri-high">Highest Priority</span>
+        <h4><span class="ch-icon">💬</span> Wedding Facebook Groups</h4>
+        <p>Target groups like "Brides of [City] 2025/2026/2027." Post demos with a simple "made this for a couple last week, happy to take on more." These groups have hundreds of thousands of engaged couples actively seeking recommendations.</p>
+      </div>
+      <div class="channel-card">
+        <span class="channel-priority pri-med">Medium Priority</span>
+        <h4><span class="ch-icon">📋</span> Wedding Directories</h4>
+        <p>Submit to The Knot, WeddingWire, Hitched (UK), WedMeGood (India), Easy Weddings (Australia). Free listings available. These drive high-intent searches from couples actively planning. Takes 1–2 weeks to get listed.</p>
+      </div>
+      <div class="channel-card">
+        <span class="channel-priority pri-med">Medium Priority</span>
+        <h4><span class="ch-icon">🤝</span> Wedding Photographer Partnerships</h4>
+        <p>Offer photographers a referral fee ($50–100/client) to recommend the service. They photograph hundreds of couples a year — they need a recommendation for wedding websites, and they don't have one yet. A single photographer partner can send 20–30 clients/year.</p>
+      </div>
+      <div class="channel-card">
+        <span class="channel-priority pri-med">Medium Priority</span>
+        <h4><span class="ch-icon">🔍</span> SEO Content</h4>
+        <p>Target keywords: "luxury wedding website," "custom wedding website builder," "cinematic wedding website," "wedding website with RSVP dashboard." Long-tail content takes 3–6 months to rank but compounds over time. Start writing now.</p>
+      </div>
+      <div class="channel-card">
+        <span class="channel-priority pri-med">Medium Priority</span>
+        <h4><span class="ch-icon">🎁</span> Referral Programme</h4>
+        <p>Give every client a referral link. If they refer a friend: $50 credit on a future update, or the friend gets a discount. Couples talk to other couples at events — the referral flywheel is strong in this market.</p>
+      </div>
+      <div class="channel-card">
+        <span class="channel-priority pri-low">Supporting</span>
+        <h4><span class="ch-icon">✉️</span> Email Sequence</h4>
+        <p>Capture leads on the marketing site (free "wedding website checklist" lead magnet). 5-email nurture sequence: what's possible → demo showcase → tier comparison → testimonials → offer. Automated via MailerLite or Loops.</p>
+      </div>
+      <div class="channel-card">
+        <span class="channel-priority pri-low">Supporting</span>
+        <h4><span class="ch-icon">🎯</span> Pinterest SEO</h4>
+        <p>Screenshots of each tier's demo pinned to "wedding website inspiration" boards. Pinterest is a pull platform — couples searching for inspiration will find the demos. Low effort, high intent traffic over time.</p>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top: 32px;">
+      <strong>The distribution shortcut:</strong> At launch, email 20 wedding photographers in your target market. Tell them you build the most beautiful wedding websites they've ever seen, offer a demo link, and propose a referral arrangement. Converting 5 of those 20 into recurring referral partners is worth 100+ clients/year at zero acquisition cost.
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 9: PRINCIPLES -->
+<section class="section" id="principles">
+  <div class="wrap">
+    <div class="section-label">09 — The Rules</div>
+    <h2 class="section-title">What We Never Compromise On</h2>
+    <p class="section-intro">
+      These are the non-negotiables. Deviate from these and the business becomes a commodity. Hold them and it stays a premium, word-of-mouth driven operation.
+    </p>
+
+    <div class="principle-grid">
+      <div class="principle-card">
+        <div class="principle-number">01</div>
+        <h4>The Demo Must Be Jaw-Dropping</h4>
+        <p>Every tier needs a demo that makes people stop scrolling and say "wait, that's a wedding website?" If the demo doesn't do that, don't launch the tier yet. The demo is the product.</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-number">02</div>
+        <h4>Onboarding Time is Sacred</h4>
+        <p>Essential: under 1 hour. Signature: 1–2 hours. Prestige: 2–4 hours. Luxe: 4–6 hours. Bespoke: 5–7 days. Any process that takes longer than this needs to be fixed before scaling.</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-number">03</div>
+        <h4>Never Touch the Template for a Client</h4>
+        <p>Every client customisation lives in appsettings.js (for template tiers). The template is never modified. This is the only way the business stays scalable. Bespoke is the only exception.</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-number">04</div>
+        <h4>Every Tier Must Justify Its Price Visually</h4>
+        <p>Prestige should look obviously different from Signature. Luxe should look obviously different from Prestige. Bespoke should look like it cost what it costs. Visual differentiation is how clients choose to upgrade.</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-number">05</div>
+        <h4>Bespoke Ships First</h4>
+        <p>The anchor tier is live before we market heavily. Having a $15,000 service on offer makes the $800 Prestige tier look like a deal. The price anchor is as important as the product itself.</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-number">06</div>
+        <h4>Cascade is Strictly Downward</h4>
+        <p>No feature is introduced in a lower tier that doesn't exist in all tiers above. If we build password protection for Luxe, it must also exist in Bespoke. This keeps the architecture coherent and the upgrade path compelling.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="plan-footer">
+  <div class="wrap">
+    <strong>Build the best first. Then cascade down.</strong>
+    <p>Master Build Plan · Wedding Website Business · Revised May 2026</p>
+    <p style="margin-top: 8px; color: rgba(90,86,114,0.6);">5 Tiers · Bespoke → Luxe → Prestige → Signature → Essential · $100k/month target</p>
+  </div>
+</footer>
+
+</body>
+</html>
